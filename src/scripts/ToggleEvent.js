@@ -4,8 +4,7 @@ class ToggleEvent extends React.Component {
     constructor(props) {
         super(props);
         this.state = { isToggleOn: true, isCheckParent: false };
-
-
+        
         // This binding is necessary to make `this` work in the callback
         this.handleClick = this.handleClick.bind(this);
     }
