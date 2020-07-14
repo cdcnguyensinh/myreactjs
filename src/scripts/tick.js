@@ -1,7 +1,6 @@
-import ReactDOM from 'react-dom';
-import React, { component, Component } from 'react';
+import React from 'react';
 
-class Tick extends Component {
+class Tick extends React.Component {
   
   constructor(props) {
     super(props);
@@ -34,7 +33,7 @@ class Tick extends Component {
 function ClockTick3(props) {
   return (
     <div>
-      <h1>This is tick time 3!</h1>
+      <h1>Set Interval</h1>
       <h2>It is {props.current}.</h2>
     </div>
   );
