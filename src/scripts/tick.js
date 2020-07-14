@@ -3,63 +3,42 @@ import React, { component, Component } from 'react';
 
 class Tick extends Component {
   
+  constructor(props) {
+    super(props);
+    this.state = {
+      date: new Date(),
+      current: ""
+    };
+    console.log("Constructor function");
+  }
+
+  componentDidMount() {
+      console.log("ComponentDidMount function");
+      setInterval(() => {
+      this.setState({
+        ...this.state,
+        current: new Date().toLocaleTimeString()
+      })
+    }, 1000);
+  }
+
   render() {
-    const TickTime1 = () => {
-      return <div>
-        <h1>Hello, world!</h1>
-        <h2>It is {new Date().toLocaleTimeString()}.</h2>
-      </div>
-    }
-
-    const Tick2 = () => {
-      return <Clock date={new Date()} />
-    }
-
-
     return (
       <div>
-        <TickTime1 />
-        <Tick2 />
+        <ClockTick3 current={this.state.current} />
       </div>
     )
   }
 }
 
-// function TickTime1() {
-//     const element = (
-// <div>
-//   <h1>Hello, world!</h1>
-//   <h2>It is {new Date().toLocaleTimeString()}.</h2>
-// </div>
-//     );
-//     ReactDOM.render(element, document.getElementById('root_2'));
-//   }
-
-//   function TickTime2() {
-//     const componentTick = (
-//       <span>
-//         <h1>This is tick time</h1>
-//         <h2>It is { <Clock date={new Date()} /> } </h2>
-//       </span>
-//     );
-
-//     ReactDOM.render(componentTick, document.getElementById('root_3'));
-//   }
-
-  function Clock(props) {
-    return (
-      <p>
-        <h1>This is tick time!</h1>
-        <h2>It is {props.date.toLocaleTimeString()}.</h2>
-      </p>
-    );
-  }
-
-//   function GetTickTime() {
-//     setInterval(TickTime1, 1000);
-//     //setInterval(TickTime2, 1000);
-//   }
-
-// //   setInterval(tickTime, 1000);
+function ClockTick3(props) {
+  return (
+    <div>
+      <h1>This is tick time 3!</h1>
+      <h2>It is {props.current}.</h2>
+    </div>
+  );
+  
+}
 
 export default Tick;
