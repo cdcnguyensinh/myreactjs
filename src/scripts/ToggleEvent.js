@@ -12,8 +12,6 @@ const data_source = [
 ]
 
 class ToggleEvent extends React.Component {
-
-
     constructor(props) {
         super(props);
         this.state = { isToggleOn: true, isCheckParent: false, selectedItems: new Set() };
