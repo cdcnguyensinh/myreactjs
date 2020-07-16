@@ -3,11 +3,15 @@ import React from 'react';
 const data_source = [
     {
         id: 1,
-        name: 'long'
+        name: 'long handsom'
     },
     {
         id: 2,
-        name: 'long2'
+        name: 'long handsome 2'
+    },
+    {
+        id: 3,
+        name: 'long handsome 3'
     }
 ]
 
@@ -28,11 +32,19 @@ class ToggleEvent extends React.Component {
 
     onChangeCheckboxParent = (event) => {
         // console.log(event.target.checked);
-        const checked = event.target.checked;
+        const isCheckedParent = event.target.checked;
         this.setState(state => {
-            console.log(state);
+            if (isCheckedParent) {
+                data_source.forEach(element => {
+                    this.state.selectedItems.add(element.id);
+                });
+            }
+            else {
+                this.state.selectedItems.clear();
+            }
+            //isCheckParent = isCheckedParent;
             return {
-                isCheckParent: checked
+                isCheckParent: isCheckedParent
             }
         });
     }
@@ -59,13 +71,24 @@ class ToggleEvent extends React.Component {
                 <button onClick={this.handleClick}>
                     {this.state.isToggleOn ? 'ON' : 'OFF'}
                 </button>
-
+                <table>
+                    <tr>
+                        <td><input type="text"></input></td>
+                        <td>
+                        <button>
+                            Add
+                        </button>
+                        </td>
+                    </tr>
+                    
+                </table>
                 <table border="1px">
                     <thead>
                         <tr>
                             <td><input type="checkbox" checked={this.state.isCheckParent} onChange={this.onChangeCheckboxParent}></input></td>
                             <td>Id</td>
                             <td>Name</td>
+                            <td>Action</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -75,6 +98,9 @@ class ToggleEvent extends React.Component {
                                     <td><input type="checkbox" checked={this.state.selectedItems.has(item.id)} onChange={(e) => this.onChangeCheckboxChildren(e, item.id)} ></input></td>
                                     <td>{item.id}</td>
                                     <td>{item.name}</td>
+                                    <td>
+                                        <button>Delete</button>
+                                    </td>
                                 </tr>
                             })
                         }
