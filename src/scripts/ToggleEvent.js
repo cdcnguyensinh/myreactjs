@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 const data_source = [
     {
         id: 1,
@@ -15,10 +16,11 @@ const data_source = [
     }
 ]
 
+
 class ToggleEvent extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { isToggleOn: true, isCheckParent: false, selectedItems: new Set() };
+        this.state = { isToggleOn: true, isCheckParent: false, selectedItems: new Set(), inputItemName: "" };
 
         // This binding is necessary to make `this` work in the callback
         this.handleClick = this.handleClick.bind(this);
@@ -52,7 +54,7 @@ class ToggleEvent extends React.Component {
     onChangeCheckboxChildren = (event, id) => {
         const checked = event.target.checked;
         //const newData = checked ? [...this.state.selectedItems, id] : this.state.selectedItems.filter(i => i !== id);
-        const newData2 = checked ? this.state.selectedItems.add(id) : this.state.selectedItems.delete(id);
+        checked ? this.state.selectedItems.add(id) : this.state.selectedItems.delete(id);
         const newData = this.state.selectedItems;
         const isCheckAll = newData.size === data_source.length;
         console.log(newData);
@@ -61,6 +63,37 @@ class ToggleEvent extends React.Component {
             selectedItems: newData,
             isCheckParent: isCheckAll
         })
+    }
+
+    onChangeInputItemName = (event) => {
+        const valueOfInputItemName = event.target.value;
+        this.setState({
+            inputItemName: valueOfInputItemName
+        });
+    }
+
+    onAddItem = () => {
+        var idItem = data_source.length + 1;
+        data_source.push({id: idItem, name: this.state.inputItemName});
+        this.setState({});
+    }
+
+    onDeleteItem = () => {
+        if(window.confirm("Are you sure?")) {
+            // for (let index = 0; index < data_source.length; index++) {
+            //     const element = data_source[index];
+            //     if(this.state.selectedItems.has(element.id)) {
+            //         data_source.splice(index, this.setState.selectedItems.size);
+            //     }
+            // }
+
+            const filterd = data_source.filter((value, index) => {
+                return !this.state.selectedItems.has(value.id);
+            });
+
+            
+            this.setState({});
+        }
     }
 
     render() {
@@ -72,15 +105,17 @@ class ToggleEvent extends React.Component {
                     {this.state.isToggleOn ? 'ON' : 'OFF'}
                 </button>
                 <table>
-                    <tr>
-                        <td><input type="text"></input></td>
-                        <td>
-                        <button>
-                            Add
-                        </button>
-                        </td>
-                    </tr>
-                    
+                    <tbody>
+                        <tr>
+                            <td><input type="text" value={this.state.inputItemName} onChange={this.onChangeInputItemName} ></input></td>
+                            <td>
+                                <button onClick={this.onAddItem }>
+                                    Add
+                                </button>
+                                <button onClick={this.onDeleteItem}>Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
                 <table border="1px">
                     <thead>
@@ -99,7 +134,7 @@ class ToggleEvent extends React.Component {
                                     <td>{item.id}</td>
                                     <td>{item.name}</td>
                                     <td>
-                                        <button>Delete</button>
+                                        <button>Edit</button>
                                     </td>
                                 </tr>
                             })
