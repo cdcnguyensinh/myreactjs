@@ -4,6 +4,7 @@ import './App.css';
 import ButtonApp from './Button.js'
 import Tick from './scripts/tick.js';
 import ToggleEvent from './scripts/ToggleEvent.js';
+import ToDoList from './scripts/ToDoList';
 
 function App_2() {
   const a ="hello"
@@ -25,7 +26,9 @@ function App_2() {
       </header>
       <ButtonApp age="12" name="long New Ocean"></ButtonApp>
       <Tick></Tick>
+
       <ToggleEvent></ToggleEvent>
+      <ToDoList />
     </div>
   );
 }
